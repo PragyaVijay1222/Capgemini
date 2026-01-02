@@ -1,1 +1,1 @@
-This repository contains all the codes/ files/ folders I did/am doing during my training session with Capgemini provided by QSpiders. The session started on 17 December 2025. 
+This repository contains all the codes/ files/ folders I did/am doing during my training session with Capgemini provided by QSpiders on Java Fullstack Development. The session started on 17 December 2025. 
