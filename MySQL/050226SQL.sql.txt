@@ -1,0 +1,222 @@
+
+SQL> CREATE TABLE PRODUCT(
+  2  PID NUMBER(4) PRIMARY KEY,
+  3  PNAME VARCHAR(20) NOT NULL,
+  4  PRICE NUMBER(7,2) CHECK(PRICE>0) NOT NULL);
+
+Table created.
+
+SQL> CREATE TABLE CUSTOMER(
+  2  CID NUMBER(4) PRIMARY KEY,
+  3  CNAME VARCHAR(20) NOT NULL,
+  4  PH_NO NUMBER(10) CHECK(LENGTH(PH_NO)=10) CHECK(PH_NO>0) NOT NULL UNIQ
+
+Table created.
+
+SQL> DESC PRODUCT;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------
+ PID                                       NOT NULL NUMBER(4)
+ PNAME                                     NOT NULL VARCHAR2(20)
+ PRICE                                     NOT NULL NUMBER(7,2)
+
+SQL> DESC CUSTOMER;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------
+ CID                                       NOT NULL NUMBER(4)
+ CNAME                                     NOT NULL VARCHAR2(20)
+ PH_NO                                     NOT NULL NUMBER(10)
+
+SQL> RENAME CUSTOMER TO BUYERS;
+
+Table renamed.
+
+SQL> DESC CUSTOMER;
+ERROR:
+ORA-04043: object CUSTOMER does not exist
+
+
+SQL> DESC BUYER;
+ERROR:
+ORA-04043: object BUYER does not exist
+
+
+SQL> DESC BUYERS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------
+ CID                                       NOT NULL NUMBER(4)
+ CNAME                                     NOT NULL VARCHAR2(20)
+ PH_NO                                     NOT NULL NUMBER(10)
+
+SQL> SHOW TABLES;
+SP2-0158: unknown SHOW option "TABLES"
+SQL> VIEW TABLE;
+SP2-0042: unknown command "VIEW TABLE" - rest of line ignored.
+SQL> SHOW TABLE;
+SP2-0158: unknown SHOW option "TABLE"
+SQL> SELECT TABLE_NAME FROM USER_TABLES;
+
+TABLE_NAME
+------------------------------
+DEPT
+EMP
+BONUS
+SALGRADE
+PRODUCT
+BUYERS
+
+6 rows selected.
+
+SQL> SELECT * FROM SALGRADE;
+
+     GRADE      LOSAL      HISAL
+---------- ---------- ----------
+         1        700       1200
+         2       1201       1400
+         3       1401       2000
+         4       2001       3000
+         5       3001       9999
+
+SQL> TRUNCATE TABLE SALGRADE;
+
+Table truncated.
+
+SQL> SELECT * FROM SALGRADE;
+
+no rows selected
+
+SQL> CREATE TABLE EXTRA_TABLE(
+  2   COL1 CHAR(20),
+  3   COL2 NUMBER(30) NOT NULL,
+  4   COL3 VARCHAR(20) CHECK(LENGTH(COL3)=20));
+
+Table created.
+
+SQL> SQL> ALTER TABLE EXTRA_TABLE ADD COL4 NUMBER(10) UNIQUE;
+
+Table altered.
+
+SQL> DESC EXTRA_TABLE;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ COL1                                               CHAR(20)
+ COL2                                      NOT NULL NUMBER(30)
+ COL3                                               VARCHAR2(20)
+ COL4                                               NUMBER(10)
+
+SQL> ALTER TABLE EXTRA_TABLE DROP COLUMN COL2;
+
+Table altered.
+
+SQL> DESC EXTRA_TABLE;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ COL1                                               CHAR(20)
+ COL3                                               VARCHAR2(20)
+ COL4                                               NUMBER(10)
+
+SQL> ALTER TABLE EXTRA_TABLE RENAME COLUMN COL4 TO PH_NUMBER;
+
+Table altered.
+
+SQL> DESC EXTRA_TABLE;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ COL1                                               CHAR(20)
+ COL3                                               VARCHAR2(20)
+ PH_NUMBER                                          NUMBER(10)
+
+SQL> ALTER TABLE EXTRA_TABLE MODIFY COL1 VARCHAR(20);
+
+Table altered.
+
+SQL> DESC EXTRA_TABLE;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ COL1                                               VARCHAR2(20)
+ COL3                                               VARCHAR2(20)
+ PH_NUMBER                                          NUMBER(10)
+
+SQL> ALTER TABLE EXTRA_TABLE MODIFY COL1 VARCHAR(20) NOT NULL UNIQUE;
+
+Table altered.
+
+SQL> DESC EXTRA_TABLE;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ COL1                                      NOT NULL VARCHAR2(20)
+ COL3                                               VARCHAR2(20)
+ PH_NUMBER                                          NUMBER(10)
+
+
+SQL> ALTER TABLE EXTRA_TABLE ADD CONSTRAINT NEW_CONSTRAINT_UNIQUE UNIQUE(COL3);
+
+Table altered.
+
+SQL> ALTER TABLE EXTRA_TABLE DROP CONSTRAINT NEW_CONSTRAINT_UNIQUE;
+
+Table altered.
+
+SQL> SELECT CONSTRAINT_TYPE, CONSTRAINT_NAME FROM ALL_CONSTRAINTS WHERE TABLE_NAME = 'EXTRA_TABLE';
+
+C CONSTRAINT_NAME
+- ------------------------------
+C SYS_C005468
+C SYS_C005466
+U SYS_C005467
+U SYS_C005469
+
+SQL> ALTER TABLE BUYERS ADD PID NUMBER(4);
+
+Table altered.
+
+SQL> ALTER TABLE BUYERS ADD CONSTRAINT NEW_FOREIGN_KEY FOREIGN KEY(PID) REFERENCES PRODUCT(PID);
+
+Table altered.
+
+
+SQL> CREATE TABLE PRODUCT(
+  2  PID NUMBER(4) PRIMARY KEY,
+  3  PNAME VARCHAR(20) NOT NULL,
+  4  PRICE NUMBER(7,2) CHECK(PRICE>0) NOT NULL);
+
+Table created.
+
+SQL> CREATE TABLE CUSTOMER(
+  2  CID NUMBER(4) PRIMARY KEY,
+  3  CNAME VARCHAR(20) NOT NULL,
+  4  PH_NO NUMBER(10) CHECK(LENGTH(PH_NO)=10) CHECK(PH_NO>0) NOT NULL UNIQUE,
+  5  PID NUMBER(4), CONSTRAINT NEW_FOREIGN_KEY FOREIGN KEY(PID) REFERENCES PRODUCT(PID));
+
+Table created.
+
+SQL> DESC CUSTOMER;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                       NOT NULL NUMBER(4)
+ CNAME                                     NOT NULL VARCHAR2(20)
+ PH_NO                                     NOT NULL NUMBER(10)
+ PID                                                NUMBER(4)
+
+SQL> SHOW RECYCLEBIN;
+ORIGINAL NAME    RECYCLEBIN NAME                OBJECT TYPE  DROP TIME
+---------------- ------------------------------ ------------ -------------------
+BUYERS           BIN$ukQs3J5dQ/yEunOJ7Ko0xg==$0 TABLE        2026-02-05:16:14:42
+PRODUCT          BIN$R49hyA0dSTC2uAPdSsDTJQ==$0 TABLE        2026-02-05:16:14:50
+SQL> PURGE TABLE PRODUCT;
+
+Table purged.
+
+SQL> SHOW RECYCLEBIN;
+ORIGINAL NAME    RECYCLEBIN NAME                OBJECT TYPE  DROP TIME
+---------------- ------------------------------ ------------ -------------------
+BUYERS           BIN$ukQs3J5dQ/yEunOJ7Ko0xg==$0 TABLE        2026-02-05:16:14:42
+
+SQL> FLASHBACK TABLE BUYERS
+  2  TO BEFORE DROP;
+
+Flashback complete.
+
+SQL> SHOW RECYCLEBIN;
+SQL> 
+

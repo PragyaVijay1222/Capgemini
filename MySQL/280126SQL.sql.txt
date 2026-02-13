@@ -1,0 +1,298 @@
+SET LINES 100 PAGES 100
+SQL> SELECT *
+  2  FROM EMP;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+14 rows selected.
+
+Q Write a querry to display job of the employees.
+
+SQL> SELECT JOB
+  2  FROM EMP;
+
+JOB                                                                                                 
+---------                                                                                           
+CLERK                                                                                               
+SALESMAN                                                                                            
+SALESMAN                                                                                            
+MANAGER                                                                                             
+SALESMAN                                                                                            
+MANAGER                                                                                             
+MANAGER                                                                                             
+ANALYST                                                                                             
+PRESIDENT                                                                                           
+SALESMAN                                                                                            
+CLERK                                                                                               
+CLERK                                                                                               
+ANALYST                                                                                             
+CLERK                                                                                               
+
+14 rows selected.
+
+Q Write a querry to display hiredate and salary of the employees.
+  
+SQL> SELECT HIREDATE, SAL
+  2  FROM EMP;
+
+HIREDATE         SAL                                                                                
+--------- ----------                                                                                
+17-DEC-80        800                                                                                
+20-FEB-81       1600                                                                                
+22-FEB-81       1250                                                                                
+02-APR-81       2975                                                                                
+28-SEP-81       1250                                                                                
+01-MAY-81       2850                                                                                
+09-JUN-81       2450                                                                                
+19-APR-87       3000                                                                                
+17-NOV-81       5000                                                                                
+08-SEP-81       1500                                                                                
+23-MAY-87       1100                                                                                
+03-DEC-81        950                                                                                
+03-DEC-81       3000                                                                                
+23-JAN-82       1300                                                                                
+
+14 rows selected.
+
+Q Write a querry to display salary name and commision of the employees.
+
+SQL> SELECT SAL, ENAME, COMM
+  2  FROM EMP;
+
+       SAL ENAME            COMM                                                                    
+---------- ---------- ----------                                                                    
+       800 SMITH                                                                                    
+      1600 ALLEN             300                                                                    
+      1250 WARD              500                                                                    
+      2975 JONES                                                                                    
+      1250 MARTIN           1400                                                                    
+      2850 BLAKE                                                                                    
+      2450 CLARK                                                                                    
+      3000 SCOTT                                                                                    
+      5000 KING                                                                                     
+      1500 TURNER              0                                                                    
+      1100 ADAMS                                                                                    
+       950 JAMES                                                                                    
+      3000 FORD                                                                                     
+      1300 MILLER                                                                                   
+
+14 rows selected.
+
+Q Find the anual salary of all the employees.
+
+SQL> SELECT ENAME, SAL*12
+  2  FROM EMP;
+
+ENAME          SAL*12                                                                               
+---------- ----------                                                                               
+SMITH            9600                                                                               
+ALLEN           19200                                                                               
+WARD            15000                                                                               
+JONES           35700                                                                               
+MARTIN          15000                                                                               
+BLAKE           34200                                                                               
+CLARK           29400                                                                               
+SCOTT           36000                                                                               
+KING            60000                                                                               
+TURNER          18000                                                                               
+ADAMS           13200                                                                               
+JAMES           11400                                                                               
+FORD            36000                                                                               
+MILLER          15600                                                                               
+
+14 rows selected.
+
+Q Write a querry to display hiredate, anual salaray and half term salary of the employees.
+
+SQL> SELECT HIREDATE, SAL*12 as "Anual Salary", SAL*6 as "Half Term Salary"
+  2  FROM EMP;
+
+HIREDATE  Anual Salary Half Term Salary                                                             
+--------- ------------ ----------------                                                             
+17-DEC-80         9600             4800                                                             
+20-FEB-81        19200             9600                                                             
+22-FEB-81        15000             7500                                                             
+02-APR-81        35700            17850                                                             
+28-SEP-81        15000             7500                                                             
+01-MAY-81        34200            17100                                                             
+09-JUN-81        29400            14700                                                             
+19-APR-87        36000            18000                                                             
+17-NOV-81        60000            30000                                                             
+08-SEP-81        18000             9000                                                             
+23-MAY-87        13200             6600                                                             
+03-DEC-81        11400             5700                                                             
+03-DEC-81        36000            18000                                                             
+23-JAN-82        15600             7800                                                             
+
+14 rows selected.
+
+Q Write a query to dispaly salary, salary with 10%increment, Annual salary
+
+SQL> SELECT SAL as "Salary", SAL*1.1 as "Salary with increment", SAL*12 as "Annual Salary"
+  2  FROM EMP;
+
+    Salary Salary with increment Annual Salary                                                      
+---------- --------------------- -------------                                                      
+       800                   880          9600                                                      
+      1600                  1760         19200                                                      
+      1250                  1375         15000                                                      
+      2975                3272.5         35700                                                      
+      1250                  1375         15000                                                      
+      2850                  3135         34200                                                      
+      2450                  2695         29400                                                      
+      3000                  3300         36000                                                      
+      5000                  5500         60000                                                      
+      1500                  1650         18000                                                      
+      1100                  1210         13200                                                      
+       950                  1045         11400                                                      
+      3000                  3300         36000                                                      
+      1300                  1430         15600                                                      
+
+14 rows selected.
+
+Q Write a quesry to display 30% decrement in salary and half term salary
+
+SQL> SELECT SAL*6 as "Half Term Salary", SAL*0.7 as "Salary after decrement"
+  2  FROM EMP;
+
+Half Term Salary Salary after decrement                                                             
+---------------- ----------------------                                                             
+            4800                    560                                                             
+            9600                   1120                                                             
+            7500                    875                                                             
+           17850                 2082.5                                                             
+            7500                    875                                                             
+           17100                   1995                                                             
+           14700                   1715                                                             
+           18000                   2100                                                             
+           30000                   3500                                                             
+            9000                   1050                                                             
+            6600                    770                                                             
+            5700                    665                                                             
+           18000                   2100                                                             
+            7800                    910                                                             
+
+14 rows selected.
+
+Q Write a query to display name, annual salary and salary with 30% increment.
+
+SQL> SELECT ENAME AS "NAME", SAL*12 AS "ANNUAL SALARY", SAL*1.3 AS "INCREMENTED SALARY"
+  2  FROM EMP;
+
+NAME       ANNUAL SALARY INCREMENTED SALARY                                                         
+---------- ------------- ------------------                                                         
+SMITH               9600               1040                                                         
+ALLEN              19200               2080                                                         
+WARD               15000               1625                                                         
+JONES              35700             3867.5                                                         
+MARTIN             15000               1625                                                         
+BLAKE              34200               3705                                                         
+CLARK              29400               3185                                                         
+SCOTT              36000               3900                                                         
+KING               60000               6500                                                         
+TURNER             18000               1950                                                         
+ADAMS              13200               1430                                                         
+JAMES              11400               1235                                                         
+FORD               36000               3900                                                         
+MILLER             15600               1690                                                         
+
+14 rows selected.
+
+Q Display unique salary
+
+SQL> SELECT DISTINCT SAL FROM EMP;
+
+       SAL                                                                                          
+----------                                                                                          
+      2450                                                                                          
+      5000                                                                                          
+      1300                                                                                          
+      1250                                                                                          
+      2850                                                                                          
+      2975                                                                                          
+      1100                                                                                          
+      3000                                                                                          
+       800                                                                                          
+      1600                                                                                          
+      1500                                                                                          
+       950                                                                                          
+
+12 rows selected.
+
+Q Write a query to display name and annual salary of ALLEN
+
+SQL> SELECT ENAME, SAL FROM EMP WHERE ENAME ='ALLEN';
+
+ENAME             SAL                                                                               
+---------- ----------                                                                               
+ALLEN            1600                                                                               
+
+Q Write a query to display details of employee along with their half term salary if there annual term is greater than 8000.
+
+SQL> SELECT EMP.*, SAL*6 AS "HALF TERM SALARY" FROM EMP WHERE SAL*12 >8000;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+HALF TERM SALARY                                                                                    
+----------------                                                                                    
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+            4800                                                                                    
+                                                                                                    
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+            9600                                                                                    
+                                                                                                    
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+            7500                                                                                    
+                                                                                                    
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+           17850                                                                                    
+                                                                                                    
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+            7500                                                                                    
+                                                                                                    
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+           17100                                                                                    
+                                                                                                    
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+           14700                                                                                    
+                                                                                                    
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+           18000                                                                                    
+                                                                                                    
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+           30000                                                                                    
+                                                                                                    
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+            9000                                                                                    
+                                                                                                    
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+            6600                                                                                    
+                                                                                                    
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+            5700                                                                                    
+                                                                                                    
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+           18000                                                                                    
+                                                                                                    
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+            7800                                                                                    
+                                                                                                    
+
+14 rows selected.
+
+SQL> spool off;
