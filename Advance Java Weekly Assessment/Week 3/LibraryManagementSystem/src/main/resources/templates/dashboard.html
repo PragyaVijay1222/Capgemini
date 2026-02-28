@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<h2>Dashboard</h2>
+
+<a th:href="@{/books/add}">Add Book</a>
+<a th:href="@{/books/list}">View Books</a>
+<a th:href="@{/users/logout}">Logout</a>
+</body>
+</html>
