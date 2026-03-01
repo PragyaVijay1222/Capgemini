@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+		<!-- bean definitions here -->
+		
+		<!--
+			scope-by default sigleton (only one object will be creted no matter how many time you call getBean() ) to create different objects we can 
+		define scope as prototype.
+		-->
+		<bean id="msgsrv" class="components.MessageService" scope="prototype">
+		<property name="emailService" ref="emlsrv"/>
+		</bean>
+		<bean id="emlsrv" class="components.EmailService" scope="prototype" init-method="init" destroy-method="destroy"/>
+
+
+</beans>
